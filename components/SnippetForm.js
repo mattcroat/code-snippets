@@ -22,7 +22,7 @@ const SnippetForm = ({ snippet }) => {
     const id = snippet.id
 
     try {
-      //TODO: updarte snippet
+      //TODO: update snippet
       router.push('/')
     } catch (err) {
       console.error(err)

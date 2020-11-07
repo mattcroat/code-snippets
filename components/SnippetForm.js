@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 const SnippetForm = ({ snippet }) => {
-  //TODO: configure react hook form
+  const { register, handleSubmit, errors } = useForm()
   const router = useRouter()
 
   const createSnippet = async (data) => {
@@ -35,10 +35,8 @@ const SnippetForm = ({ snippet }) => {
     }
   }
 
-  //TODO: register inputs and add error messages
   return (
-    //TODO: wrap with handleSubmit from react-hook-form
-    <form onSubmit={snippet ? updateSnippet : createSnippet}>
+    <form onSubmit={handleSubmit(snippet ? updateSnippet : createSnippet)}>
       <div className="mb-4">
         <label
           className="block text-red-100 text-sm font-bold mb-1"
@@ -51,7 +49,11 @@ const SnippetForm = ({ snippet }) => {
           id="name"
           name="name"
           className="w-full border bg-white rounded px-3 py-2 outline-none text-gray-700"
+          ref={register({ required: true })}
         />
+        {errors.name && (
+          <p className="font-bold text-red-400">Name is required</p>
+        )}
       </div>
       <div className="mb-4">
         <label
@@ -64,11 +66,15 @@ const SnippetForm = ({ snippet }) => {
           id="language"
           name="language"
           className="w-full border bg-white rounded px-3 py-2 outline-none text-gray-700"
+          ref={register({ required: true })}
         >
           <option className="py-1">JavaScript</option>
           <option className="py-1">HTML</option>
           <option className="py-1">CSS</option>
         </select>
+        {errors.language && (
+          <p className="font-bold text-red-400">Language is required</p>
+        )}
       </div>
       <div className="mb-4">
         <label
@@ -83,7 +89,11 @@ const SnippetForm = ({ snippet }) => {
           rows="3"
           className="resize-none w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
           placeholder="What does the snippet do?"
+          ref={register({ required: true })}
         ></textarea>
+        {errors.description && (
+          <p className="font-bold text-red-400">Description is required</p>
+        )}
       </div>
       <div className="mb-4">
         <label
@@ -97,8 +107,12 @@ const SnippetForm = ({ snippet }) => {
           id="code"
           rows="10"
           className="resize-none w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
-          placeholder="ex. console.log('helloworld')"
+          placeholder="ex. console.log('Hello, World!')"
+          ref={register({ required: true })}
         ></textarea>
+        {errors.code && (
+          <p className="font-bold text-red-400">Code is required</p>
+        )}
       </div>
       <button
         className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"

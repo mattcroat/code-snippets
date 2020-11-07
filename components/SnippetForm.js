@@ -10,7 +10,13 @@ const SnippetForm = ({ snippet }) => {
     const { code, language, description, name } = data
 
     try {
-      //TODO: create snippet
+      await fetch('/api/createSnippet', {
+        method: 'POST',
+        body: JSON.stringify({ code, language, description, name }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       router.push('/')
     } catch (err) {
       console.error(err)

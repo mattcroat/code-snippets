@@ -32,8 +32,12 @@ const createSnippet = async (code, language, description, name) => {
   )
 }
 
-const updateSnippet = async (id, code, language, name, description) => {
-  //TODO: update snippet
+const updateSnippet = async (id, code, language, description, name) => {
+  return await faunaClient.query(
+    q.Update(q.Ref(q.Collection('snippets'), id), {
+      data: { code, language, description, name },
+    })
+  )
 }
 
 const deleteSnippet = async (id) => {

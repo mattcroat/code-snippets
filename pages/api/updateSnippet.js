@@ -1,6 +1,6 @@
 import { updateSnippet } from '@/utils/Fauna'
 
-const handler = (req, res) => {
+const handler = async (req, res) => {
   if (req.method !== 'PUT') {
     return res.status(405).json({ msg: 'Method not allowed' })
   }

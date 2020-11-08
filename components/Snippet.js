@@ -1,12 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import Code from './Code'
 
 const Snippet = ({ snippet, snippetDeleted }) => {
-  const router = useRouter()
-
   const deleteSnippet = async () => {
     try {
       await fetch('/api/deleteSnippet', {

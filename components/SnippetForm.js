@@ -3,7 +3,14 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 const SnippetForm = ({ snippet }) => {
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors } = useForm({
+    defaultValues: {
+      code: snippet ? snippet.data.code : '',
+      language: snippet ? snippet.data.language : '',
+      description: snippet ? snippet.data.description : '',
+      name: snippet ? snippet.data.name : '',
+    },
+  })
   const router = useRouter()
 
   const createSnippet = async (data) => {

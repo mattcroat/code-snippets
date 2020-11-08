@@ -8,7 +8,8 @@ const handler = async (req, res) => {
   const { id } = req.body
 
   try {
-    //TODO: Delete Snippet
+    const deletedSnippet = deleteSnippet(id)
+    return res.status(200).json(deletedSnippet)
   } catch (err) {
     console.error(err)
     res.status(500).json({ msg: 'Something went wrong.' })

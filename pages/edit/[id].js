@@ -4,6 +4,22 @@ import SnippetForm from '@/components/SnippetForm'
 
 import { getSnippetById } from '@/utils/Fauna'
 
+export const getServerSideProps = async (context) => {
+  try {
+    const id = context.params.id
+    const snippet = await getSnippetById(id)
+
+    return {
+      props: { snippet },
+    }
+  } catch (error) {
+    console.error(error)
+    context.res.statusCode = 302
+    context.res.setHeader('Location', `/`)
+    return { props: {} }
+  }
+}
+
 const Home = ({ snippet }) => {
   return (
     <div>

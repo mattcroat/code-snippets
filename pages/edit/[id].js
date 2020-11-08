@@ -37,17 +37,3 @@ const Home = ({ snippet }) => {
 }
 
 export default Home
-
-export const getServerSideProps = async (context) => {
-  try {
-    //TODO: Get and return snippet as prop
-    return {
-      props: {},
-    }
-  } catch (error) {
-    console.error(error)
-    context.res.statusCode = 302
-    context.res.setHeader('Location', `/`)
-    return { props: {} }
-  }
-}

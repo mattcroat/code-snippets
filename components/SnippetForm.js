@@ -28,7 +28,13 @@ const SnippetForm = ({ snippet }) => {
     const id = snippet.id
 
     try {
-      //TODO: update snippet
+      await fetch('/api/updateSnippet', {
+        method: 'PUT',
+        body: JSON.stringify({ id, code, language, description, name }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       router.push('/')
     } catch (err) {
       console.error(err)
